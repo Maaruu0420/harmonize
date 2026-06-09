@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>寬堂空間設計｜行銷規劃 6/15–7/14</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Noto+Sans+TC:wght@300;400;500&family=Noto+Serif+TC:wght@300;400&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black:  #0A0A0A;
+    --white:  #F5F3F0;
+    --green:  #7AB648;
+    --grey:   #888888;
+    --line:   #2A2A2A;
+    --line-lt:#DDDAD6;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    background: #1A1A1A;
+    font-family: 'Noto Sans TC', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 32px 20px;
+    gap: 8px;
+  }
+
+  .slide {
+    width: 960px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 32px rgba(0,0,0,0.6);
+  }
+
+  .layout {
+    display: flex;
+    min-height: 520px;
+  }
+  .col-label {
+    width: 180px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 48px 32px;
+  }
+  .col-label .en-top {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.25em;
+    color: var(--grey);
+    margin-bottom: 4px;
+  }
+  .col-label .en-big {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 26px;
+    letter-spacing: 0.1em;
+    line-height: 1.1;
+  }
+  .col-label .divider {
+    width: 24px;
+    height: 1px;
+    margin: 16px 0;
+  }
+  .col-label .zh-sub {
+    font-size: 18px;
+    letter-spacing: 0.15em;
+    line-height: 1.8;
+  }
+  .col-body {
+    flex: 1;
+    padding: 56px 64px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  /* COVER */
+  .cover {
+    background: var(--black);
+    min-height: 540px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 72px;
+    position: relative;
+  }
+  .radial {
+    position: absolute;
+    right: -60px; top: 50%;
+    transform: translateY(-50%);
+    width: 500px; height: 500px;
+    opacity: 0.12;
+    pointer-events: none;
+  }
+  .radial line { stroke: white; stroke-width: 1.2; }
+  .cover-eyebrow {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 15px; letter-spacing: 0.35em; color: var(--grey);
+    margin-bottom: 20px;
+    display: flex; align-items: center; gap: 14px;
+  }
+  .cover-eyebrow::before {
+    content:''; display:block; width:3px; height:3px;
+    border-radius:50%; background:var(--green);
+  }
+  .cover-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 72px; color: var(--white);
+    line-height: 0.95; letter-spacing: 0.04em;
+  }
+  .cover-title .accent { color: var(--green); }
+  .cover-date {
+    margin-top: 28px; font-size: 13px; color: var(--grey);
+    letter-spacing: 0.2em;
+    display: flex; align-items: center; gap: 16px;
+  }
+  .cover-date::before { content:''; display:block; width:32px; height:1px; background:var(--grey); }
+  .cover-logo {
+    position: relative; z-index: 2;
+    display: flex; flex-direction: column; align-items: flex-end; gap: 8px;
+  }
+
+  /* DARK pages */
+  .dark { background: var(--black); }
+  .dark .col-label { border-right: 1px solid var(--line); }
+  .dark .col-label .en-big { color: var(--white); }
+  .dark .col-label .divider { background: var(--green); }
+  .dark .col-label .zh-sub { color: var(--grey); }
+
+  /* LIGHT pages */
+  .light { background: var(--white); }
+  .light .col-label { border-right: 1px solid var(--line-lt); }
+  .light .col-label .en-big { color: var(--black); }
+  .light .col-label .divider { background: var(--black); }
+  .light .col-label .zh-sub { color: var(--grey); }
+
+  /* Time plan */
+  .info-row { display:flex; align-items:baseline; gap:0; margin-bottom:40px; }
+  .info-row:last-child { margin-bottom:0; }
+  .info-label { font-family:'Bebas Neue',sans-serif; font-size:13px; letter-spacing:0.25em; color:var(--grey); width:120px; flex-shrink:0; }
+  .info-value { font-size:14px; color:var(--white); letter-spacing:0.1em; line-height:2; }
+  .info-value strong { font-family:'Bebas Neue',sans-serif; font-size:32px; letter-spacing:0.05em; color:var(--white); display:block; line-height:1; margin-bottom:8px; }
+
+  /* Tag grid */
+  .tag-grid { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--line-lt); border:1px solid var(--line-lt); }
+  .tag-cell { background:var(--white); padding:32px 36px; display:flex; flex-direction:column; gap:10px; }
+  .tag-num  { font-family:'Bebas Neue',sans-serif; font-size:12px; letter-spacing:0.3em; color:var(--grey); }
+  .tag-name { font-family:'Noto Serif TC',serif; font-size:22px; font-weight:300; color:var(--black); letter-spacing:0.05em; }
+  .tag-en   { font-family:'Bebas Neue',sans-serif; font-size:12px; letter-spacing:0.25em; color:var(--grey); }
+  .tag-cell.active { background:#F0F7EA; }
+  .tag-cell.active .tag-name { color:var(--green); }
+
+  /* Content pages */
+  .content-header { margin-bottom:28px; padding-bottom:20px; display:flex; align-items:baseline; justify-content:space-between; }
+  .content-tag { font-family:'Bebas Neue',sans-serif; font-size:12px; letter-spacing:0.3em; color:var(--green); border:1px solid var(--green); padding:4px 12px; }
+  .content-tag-zh { font-size:13px; color:var(--grey); letter-spacing:0.15em; }
+  .content-desc { font-size:17px; color:#AAAAAA; line-height:2; margin-bottom:24px; max-width:480px; }
+  .article-list { display:flex; flex-direction:column; gap:0; }
+  .article-item { display:flex; align-items:flex-start; gap:16px; padding:13px 0; border-bottom:1px solid var(--line); font-size:13px; color:var(--white); line-height:1.7; letter-spacing:0.03em; }
+  .article-item:last-child { border-bottom:none; }
+  .article-num { font-family:'Bebas Neue',sans-serif; font-size:12px; letter-spacing:0.2em; color:var(--grey); width:24px; flex-shrink:0; padding-top:2px; }
+
+  /* Three-article variant (for 設計觀點 月底 3 篇) */
+  .article-list.three .content-desc { margin-bottom:16px; }
+  .article-list.three .article-item { padding:11px 0; }
+
+  /* Image blocks */
+  .img-block { width:260px; flex-shrink:0; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:10px; background:#111; border-left:1px solid var(--line); }
+  .img-block svg { opacity:0.2; }
+  .img-block span { font-size:12px; color:#444; letter-spacing:0.1em; }
+  .img-block img { width:100%; height:100%; object-fit:cover; display:block; }
+  .img-block-light { width:260px; flex-shrink:0; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:10px; background:#E8E5E0; border-left:1px solid var(--line-lt); }
+  .img-block-light svg { opacity:0.3; }
+  .img-block-light span { font-size:12px; color:#999; letter-spacing:0.1em; }
+
+  /* CALENDAR */
+  .cal-slide { background:var(--white); display:flex; min-height:520px; }
+  .cal-label-col { width:180px; flex-shrink:0; padding:48px 32px; border-right:1px solid var(--line-lt); display:flex; flex-direction:column; justify-content:flex-end; }
+  .cal-label-col .en-top { font-family:'Bebas Neue',sans-serif; font-size:13px; letter-spacing:0.25em; color:var(--grey); margin-bottom:4px; }
+  .cal-label-col .en-big { font-family:'Bebas Neue',sans-serif; font-size:26px; letter-spacing:0.1em; color:var(--black); line-height:1.1; }
+  .cal-label-col .divider { width:24px; height:1px; background:var(--green); margin:16px 0; }
+  .cal-label-col .zh-sub { font-size:18px; color:var(--grey); letter-spacing:0.15em; line-height:1.8; }
+  .cal-body { flex:1; padding:36px 44px; display:flex; flex-direction:column; }
+  .cal-month-label { font-family:'Bebas Neue',sans-serif; font-size:13px; letter-spacing:0.3em; color:var(--grey); margin-bottom:16px; }
+  .cal-grid { display:grid; grid-template-columns:repeat(7,1fr); gap:1px; background:var(--line-lt); border:1px solid var(--line-lt); flex:1; }
+  .cc { background:var(--white); padding:9px 9px 7px; min-height:62px; display:flex; flex-direction:column; gap:5px; }
+  .cc.hd { min-height:auto; padding:8px 9px; background:var(--black); align-items:center; }
+  .cc.hd span { font-family:'Bebas Neue',sans-serif; font-size:12px; letter-spacing:0.2em; color:rgba(255,255,255,0.6); }
+  .cc.off { background:#EFECE8; }
+  .cc.past { background:#F5F3F0; }
+  .cc.post { background:#EBF3E8; }
+  .cc-date { font-family:'Bebas Neue',sans-serif; font-size:14px; letter-spacing:0.05em; color:#AAAAAA; }
+  .cc.past .cc-date { color:#CCCCCC; }
+  .cc.post .cc-date { color:var(--green); font-size:15px; }
+  .cc-tag { font-size:12px; color:#2E5B3C; background:rgba(122,182,72,0.15); padding:2px 6px; letter-spacing:0.03em; line-height:1.5; display:inline-block; }
+
+  /* THANKS */
+  .thanks { background:var(--black); min-height:540px; display:flex; align-items:center; padding:0 72px; position:relative; overflow:hidden; }
+  .thanks-word { font-family:'Bebas Neue',sans-serif; font-size:96px; color:var(--white); letter-spacing:0.06em; line-height:1; margin-bottom:24px; }
+  .thanks-word .accent { color:var(--green); }
+  .thanks-meta { font-size:13px; color:var(--grey); letter-spacing:0.2em; display:flex; align-items:center; gap:16px; }
+  .thanks-meta::before { content:''; display:block; width:32px; height:1px; background:var(--grey); }
+</style>
+</head>
+<body>
+
+<!-- P1 COVER -->
+<div class="slide cover">
+  <svg class="radial" viewBox="0 0 500 500">
+    <line x1="500" y1="250" x2="0"   y2="0"/><line x1="500" y1="250" x2="30"  y2="0"/>
+    <line x1="500" y1="250" x2="70"  y2="0"/><line x1="500" y1="250" x2="110" y2="0"/>
+    <line x1="500" y1="250" x2="150" y2="0"/><line x1="500" y1="250" x2="190" y2="0"/>
+    <line x1="500" y1="250" x2="230" y2="0"/><line x1="500" y1="250" x2="270" y2="0"/>
+    <line x1="500" y1="250" x2="310" y2="0"/><line x1="500" y1="250" x2="350" y2="0"/>
+    <line x1="500" y1="250" x2="390" y2="0"/><line x1="500" y1="250" x2="430" y2="0"/>
+    <line x1="500" y1="250" x2="0"   y2="100"/><line x1="500" y1="250" x2="0" y2="200"/>
+    <line x1="500" y1="250" x2="0"   y2="300"/><line x1="500" y1="250" x2="0" y2="400"/>
+    <line x1="500" y1="250" x2="50"  y2="500"/><line x1="500" y1="250" x2="150" y2="500"/>
+    <line x1="500" y1="250" x2="250" y2="500"/><line x1="500" y1="250" x2="350" y2="500"/>
+    <line x1="500" y1="250" x2="450" y2="500"/>
+  </svg>
+  <div style="position:relative;z-index:2;">
+    <div class="cover-eyebrow">HARMONIZE DESIGN　2026</div>
+    <div class="cover-title">MARKETING<br><span class="accent">PLANN</span>ING</div>
+    <div class="cover-date">6/15 – 7/14　行銷規劃簡報</div>
+  </div>
+  <div class="cover-logo" style="position:relative;z-index:2;font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:0.25em;color:#F5F3F0;">寬堂空間設計</div>
+</div>
+
+<!-- P2 時間規劃 -->
+<div class="slide dark">
+  <div class="layout">
+    <div class="col-label">
+      <div class="en-top">01</div>
+      <div class="en-big">TIME<br>PLAN</div>
+      <div class="divider"></div>
+      <div class="zh-sub">時間規劃</div>
+    </div>
+    <div class="col-body">
+      <div class="info-row">
+        <div class="info-label">FREQUENCY</div>
+        <div class="info-value"><strong>每週兩篇</strong>發文頻率</div>
+      </div>
+      <div class="info-row">
+        <div class="info-label">TIME SLOT</div>
+        <div class="info-value">平日<br>12:00 ～ 13:00<br>18:00 ～ 19:00</div>
+      </div>
+    </div>
+    <div class="img-block">
+      <img src="23.jpg" style="width:100%;height:100%;object-fit:cover;display:block;">
+    </div>
+  </div>
+</div>
+
+<!-- P3 主題規劃 -->
+<div class="slide light">
+  <div class="layout">
+    <div class="col-label">
+      <div class="en-top">02</div>
+      <div class="en-big">THEME<br>PLAN</div>
+      <div class="divider"></div>
+      <div class="zh-sub">主題<br>規劃</div>
+    </div>
+    <div class="col-body" style="padding:48px;">
+      <div class="tag-grid">
+        <div class="tag-cell">
+          <div class="tag-num">01</div>
+          <div class="tag-name">設計觀點</div>
+          <div class="tag-en">DESIGN PERSPECTIVE</div>
+        </div>
+        <div class="tag-cell">
+          <div class="tag-num">02</div>
+          <div class="tag-name">合作的距離</div>
+          <div class="tag-en">THE DISTANCE</div>
+        </div>
+        <div class="tag-cell">
+          <div class="tag-num">03</div>
+          <div class="tag-name">價值之外</div>
+          <div class="tag-en">BEYOND VALUE</div>
+        </div>
+        <div class="tag-cell">
+          <div class="tag-num">04</div>
+          <div class="tag-name">時間裡的家</div>
+          <div class="tag-en">HOME OVER TIME</div>
+        </div>
+      </div>
+    </div>
+    <div class="img-block-light">
+      <img src="2.jpg" style="width:100%;height:100%;object-fit:cover;display:block;">
+    </div>
+  </div>
+</div>
+
+<!-- P4 設計觀點 (3 篇) -->
+<div class="slide dark">
+  <div class="layout">
+    <div class="col-label">
+      <div class="en-top">03</div>
+      <div class="en-big">DESIGN<br>PERSP.</div>
+      <div class="divider"></div>
+      <div class="zh-sub">設計觀點<br>主題內容</div>
+    </div>
+    <div class="col-body">
+      <div class="content-header" style="border-bottom:1px solid var(--line);">
+        <div class="content-tag">DESIGN PERSPECTIVE</div>
+        <div class="content-tag-zh">設計觀點</div>
+      </div>
+      <div class="content-desc" style="margin-bottom:16px;">從業主與設計師兩種視角的對話切入，談那些在裝修現場真正會被記得的事——不是風格，而是合作的感覺；不是堆疊，而是被處理掉的不安。</div>
+      <div class="article-list">
+        <div class="article-item" style="padding:11px 0;"><div class="article-num">01</div>進門的前 3 秒，只要看懂 1 條線：家的秩序就成立了（《家的分鏡》Vol.2）</div>
+        <div class="article-item" style="padding:11px 0;"><div class="article-num">02</div>屋主說「怪怪的」，我聽懂了（《設計筆記》Vol.3）</div>
+        <div class="article-item" style="padding:11px 0;"><div class="article-num">03</div>裝修做完了，家卻還是少一味？問題常常不在工程，而在家具配置（《空間與家具》Vol.1）</div>
+      </div>
+    </div>
+    <div class="img-block">
+      <img src="01.png" style="width:100%;height:100%;object-fit:cover;display:block;object-position:30% 50%;">
+    </div>
+  </div>
+</div>
+
+<!-- P5 合作的距離 -->
+<div class="slide light">
+  <div class="layout">
+    <div class="col-label">
+      <div class="en-top">04</div>
+      <div class="en-big">THE<br>DIST.</div>
+      <div class="divider"></div>
+      <div class="zh-sub">合作的距離<br>主題內容</div>
+    </div>
+    <div class="col-body">
+      <div class="content-header" style="border-bottom:1px solid var(--line-lt);">
+        <div class="content-tag" style="color:var(--black);border-color:var(--black);">THE DISTANCE</div>
+        <div class="content-tag-zh">合作的距離</div>
+      </div>
+      <div class="content-desc" style="color:#666;">許多屋主在踏出第一步前，最大的猶豫不是預算或風格，而是「這個人到底適不適合」。這個主題從業主視角出發，談那些還沒說出口的疑慮，以及合作關係如何被慢慢建立。</div>
+      <div class="article-list">
+        <div class="article-item" style="color:var(--black);border-bottom-color:var(--line-lt);"><div class="article-num" style="color:#BBB;">01</div>不是不想裝修，是一想到要跟設計師周旋，就先退縮了（《還沒說出口的裝修問題》Vol.1）</div>
+        <div class="article-item" style="color:var(--black);border-bottom:none;"><div class="article-num" style="color:#BBB;">02</div>我怕遇到錯的人，不是怕裝修本身（《設計師，我有話要說》F-01）</div>
+      </div>
+    </div>
+    <div class="img-block-light">
+      <img src="02.png" style="width:100%;height:100%;object-fit:cover;display:block;object-position:40% 50%;">
+    </div>
+  </div>
+</div>
+
+<!-- P6 價值之外 -->
+<div class="slide dark">
+  <div class="layout">
+    <div class="col-label">
+      <div class="en-top">05</div>
+      <div class="en-big">BEYOND<br>VALUE</div>
+      <div class="divider"></div>
+      <div class="zh-sub">價值之外<br>主題內容</div>
+    </div>
+    <div class="col-body">
+      <div class="content-header" style="border-bottom:1px solid var(--line);">
+        <div class="content-tag">BEYOND VALUE</div>
+        <div class="content-tag-zh">價值之外</div>
+      </div>
+      <div class="content-desc">裝修的價格從來不只是材料與工程的加總，更多是那些被處理掉的風險、被預判的麻煩、被避免的後悔。這個主題重新詮釋「貴」這件事，談業主真正在買的，從來不是表面看到的東西。</div>
+      <div class="article-list">
+        <div class="article-item"><div class="article-num">01</div>一年 300 小時的陪伴，你打算花多少錢買回來？（《除了坪數》Vol.1）</div>
+        <div class="article-item"><div class="article-num">02</div>好的設計，也是一種風險管理（《住得安穩》Vol.7）</div>
+      </div>
+    </div>
+    <div class="img-block">
+      <img src="03.png" style="width:100%;height:100%;object-fit:cover;display:block;object-position:45% 50%;">
+    </div>
+  </div>
+</div>
+
+<!-- P7 時間裡的家 -->
+<div class="slide light">
+  <div class="layout">
+    <div class="col-label">
+      <div class="en-top">06</div>
+      <div class="en-big">HOME<br>TIME</div>
+      <div class="divider"></div>
+      <div class="zh-sub">時間裡的家<br>主題內容</div>
+    </div>
+    <div class="col-body">
+      <div class="content-header" style="border-bottom:1px solid var(--line-lt);">
+        <div class="content-tag" style="color:var(--black);border-color:var(--black);">HOME OVER TIME</div>
+        <div class="content-tag-zh">時間裡的家</div>
+      </div>
+      <div class="content-desc" style="color:#666;">家不是完工那一刻就結束，而是從那天開始才真正展開。這個主題從時間的縱深切入，談那些住了一段時間之後才看清楚的事，以及為什麼有些選擇要在裝修前就被想進去。</div>
+      <div class="article-list">
+        <div class="article-item" style="color:var(--black);border-bottom-color:var(--line-lt);"><div class="article-num" style="color:#BBB;">01</div>真正耐住的家，從來不只是好看而已（《住得安穩》Vol.10）</div>
+        <div class="article-item" style="color:var(--black);border-bottom:none;"><div class="article-num" style="color:#BBB;">02</div>下半場的家，不是將就，是把生活留回自己（《人生下半場》Vol.0）</div>
+      </div>
+    </div>
+    <div class="img-block-light">
+      <img src="04.jpg" style="width:100%;height:100%;object-fit:cover;display:block;object-position:85% 50%;">
+    </div>
+  </div>
+</div>
+
+<!-- P8 六月曆 (6/15–6/30) -->
+<div class="slide cal-slide">
+  <div class="cal-label-col">
+    <div class="en-top">07</div>
+    <div class="en-big">SCHEDULE</div>
+    <div class="divider"></div>
+    <div class="zh-sub">排程規劃<br><br>六月<br>JUN 2026</div>
+  </div>
+  <div class="cal-body">
+    <div class="cal-month-label">JUNE 2026　六月排程（自 6/15 起）</div>
+    <div class="cal-grid">
+      <div class="cc hd"><span>SUN</span></div><div class="cc hd"><span>MON</span></div><div class="cc hd"><span>TUE</span></div><div class="cc hd"><span>WED</span></div><div class="cc hd"><span>THU</span></div><div class="cc hd"><span>FRI</span></div><div class="cc hd"><span>SAT</span></div>
+      <!-- 6/1=週一，前空 Sun 一格 -->
+      <div class="cc off"></div>
+      <div class="cc past"><div class="cc-date">1</div></div>
+      <div class="cc past"><div class="cc-date">2</div></div>
+      <div class="cc past"><div class="cc-date">3</div></div>
+      <div class="cc past"><div class="cc-date">4</div></div>
+      <div class="cc past"><div class="cc-date">5</div></div>
+      <div class="cc past"><div class="cc-date">6</div></div>
+      <!-- 7(日)~13(六) -->
+      <div class="cc past"><div class="cc-date">7</div></div>
+      <div class="cc past"><div class="cc-date">8</div></div>
+      <div class="cc past"><div class="cc-date">9</div></div>
+      <div class="cc past"><div class="cc-date">10</div></div>
+      <div class="cc past"><div class="cc-date">11</div></div>
+      <div class="cc past"><div class="cc-date">12</div></div>
+      <div class="cc past"><div class="cc-date">13</div></div>
+      <!-- 14(日)~20(六) 15(一)發文 18(四)發文 -->
+      <div class="cc past"><div class="cc-date">14</div></div>
+      <div class="cc post"><div class="cc-date">15</div><div class="cc-tag">設計觀點</div></div>
+      <div class="cc"><div class="cc-date">16</div></div>
+      <div class="cc"><div class="cc-date">17</div></div>
+      <div class="cc post"><div class="cc-date">18</div><div class="cc-tag">設計觀點</div></div>
+      <div class="cc"><div class="cc-date">19</div></div>
+      <div class="cc"><div class="cc-date">20</div></div>
+      <!-- 21(日)~27(六) 22(一)發文 25(四)發文 -->
+      <div class="cc"><div class="cc-date">21</div></div>
+      <div class="cc post"><div class="cc-date">22</div><div class="cc-tag">合作的距離</div></div>
+      <div class="cc"><div class="cc-date">23</div></div>
+      <div class="cc"><div class="cc-date">24</div></div>
+      <div class="cc post"><div class="cc-date">25</div><div class="cc-tag">合作的距離</div></div>
+      <div class="cc"><div class="cc-date">26</div></div>
+      <div class="cc"><div class="cc-date">27</div></div>
+      <!-- 28(日)~30(二) 29(一)發文 -->
+      <div class="cc"><div class="cc-date">28</div></div>
+      <div class="cc post"><div class="cc-date">29</div><div class="cc-tag">價值之外</div></div>
+      <div class="cc"><div class="cc-date">30</div></div>
+      <div class="cc off"></div><div class="cc off"></div><div class="cc off"></div><div class="cc off"></div>
+    </div>
+  </div>
+</div>
+
+<!-- P9 七月曆 (7/1–7/14) -->
+<div class="slide cal-slide">
+  <div class="cal-label-col">
+    <div class="en-top">08</div>
+    <div class="en-big">SCHEDULE</div>
+    <div class="divider"></div>
+    <div class="zh-sub">排程規劃<br><br>七月<br>JUL 2026</div>
+  </div>
+  <div class="cal-body">
+    <div class="cal-month-label">JULY 2026　七月排程（至 7/14）</div>
+    <div class="cal-grid">
+      <div class="cc hd"><span>SUN</span></div><div class="cc hd"><span>MON</span></div><div class="cc hd"><span>TUE</span></div><div class="cc hd"><span>WED</span></div><div class="cc hd"><span>THU</span></div><div class="cc hd"><span>FRI</span></div><div class="cc hd"><span>SAT</span></div>
+      <!-- 7/1=週三，Sun Mon Tue 三格空 -->
+      <div class="cc off"></div><div class="cc off"></div><div class="cc off"></div>
+      <div class="cc"><div class="cc-date">1</div></div>
+      <div class="cc post"><div class="cc-date">2</div><div class="cc-tag">價值之外</div></div>
+      <div class="cc"><div class="cc-date">3</div></div>
+      <div class="cc"><div class="cc-date">4</div></div>
+      <!-- [5/日][6/一發文][7/二][8/三][9/四發文][10/五][11/六] -->
+      <div class="cc"><div class="cc-date">5</div></div>
+      <div class="cc post"><div class="cc-date">6</div><div class="cc-tag">時間裡的家</div></div>
+      <div class="cc"><div class="cc-date">7</div></div>
+      <div class="cc"><div class="cc-date">8</div></div>
+      <div class="cc post"><div class="cc-date">9</div><div class="cc-tag">時間裡的家</div></div>
+      <div class="cc"><div class="cc-date">10</div></div>
+      <div class="cc"><div class="cc-date">11</div></div>
+      <!-- [12/日][13/一發文][14/二] 規劃期最後一天 -->
+      <div class="cc"><div class="cc-date">12</div></div>
+      <div class="cc post"><div class="cc-date">13</div><div class="cc-tag">設計觀點</div></div>
+      <div class="cc"><div class="cc-date">14</div></div>
+      <div class="cc off"></div><div class="cc off"></div><div class="cc off"></div><div class="cc off"></div>
+    </div>
+  </div>
+</div>
+
+<!-- P10 THANKS -->
+<div class="slide thanks">
+  <svg class="radial" viewBox="0 0 500 500">
+    <line x1="500" y1="250" x2="0"   y2="0"/><line x1="500" y1="250" x2="50"  y2="0"/>
+    <line x1="500" y1="250" x2="100" y2="0"/><line x1="500" y1="250" x2="150" y2="0"/>
+    <line x1="500" y1="250" x2="200" y2="0"/><line x1="500" y1="250" x2="250" y2="0"/>
+    <line x1="500" y1="250" x2="300" y2="0"/><line x1="500" y1="250" x2="350" y2="0"/>
+    <line x1="500" y1="250" x2="0"   y2="150"/><line x1="500" y1="250" x2="0" y2="350"/>
+    <line x1="500" y1="250" x2="100" y2="500"/><line x1="500" y1="250" x2="300" y2="500"/>
+  </svg>
+  <div style="position:relative;z-index:2;">
+    <div style="margin-bottom:32px;font-family:'Noto Sans TC',sans-serif;font-size:16px;letter-spacing:0.25em;color:#F5F3F0;">寬堂空間設計</div>
+    <div class="thanks-word">THANK<span class="accent">S</span></div>
+    <div class="thanks-meta">　6/15 – 7/14 社群規劃</div>
+  </div>
+</div>
+
+</body>
+</html>
