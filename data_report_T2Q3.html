@@ -1,0 +1,1582 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>寬堂空間設計｜社群與數據觀察報告 T2Q3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Serif+TC:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue: #1897DE;
+    --blue-dark: #1479B0;
+    --blue-soft: #E8F4FA;
+    --blue-tint: #F8FBFD;
+    --green: #77A849;
+    --green-dark: #5A8535;
+    --green-soft: #E8F5EA;
+    --green-tint: #F4F9EF;
+    --text: #2c2c2c;
+    --text-mid: #555;
+    --text-light: #888;
+    --text-lighter: #B0B0B0;
+    --bg: #ffffff;
+    --bg-page: #EEF0F3;
+    --line: #E5E5E5;
+    --line-light: #F0F0F0;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    font-family: 'Noto Sans TC', sans-serif;
+    color: var(--text);
+    background: var(--bg-page);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 32px 16px;
+    gap: 16px;
+  }
+
+  /* ============ SLIDE FRAME ============ */
+  .slide {
+    background: var(--bg);
+    width: 100%;
+    max-width: 1200px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+    padding: 72px 80px 72px 92px;
+    border-radius: 2px;
+  }
+
+  .slide::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 12px;
+    background: var(--blue);
+  }
+
+  .slide.cover, .slide.cover::before { background: #0F5A85; }
+  .slide.cover::before { display: none; }
+
+  /* ============ TYPOGRAPHY ============ */
+  h1, h2, h3, h4 { font-family: 'Noto Serif TC', serif; font-weight: 500; }
+  .num, .en, .stat-num { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.03em; }
+
+  .slide-eyebrow {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 15px;
+    letter-spacing: 0.35em;
+    color: var(--text-light);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .slide-eyebrow::before {
+    content: '';
+    width: 24px; height: 1px;
+    background: var(--blue);
+  }
+
+  .slide-title {
+    font-size: 40px;
+    color: var(--blue);
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+
+  .slide-subtitle {
+    color: var(--text-mid);
+    font-size: 16px;
+    margin-bottom: 40px;
+    letter-spacing: 0.05em;
+  }
+
+  .divider {
+    width: 40px;
+    height: 3px;
+    background: var(--green);
+    margin: 32px 0;
+  }
+
+  /* ============ COVER ============ */
+  .cover {
+    color: #fff;
+    padding: 100px 80px 100px 92px;
+    min-height: 620px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+  }
+  .cover-radial {
+    position: absolute;
+    right: -100px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 600px;
+    height: 600px;
+    opacity: 0.15;
+    pointer-events: none;
+  }
+  .cover-radial line { stroke: #fff; stroke-width: 1.5; }
+
+  .cover-eyebrow {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 16px;
+    letter-spacing: 0.4em;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 24px;
+    position: relative;
+    z-index: 2;
+  }
+  .cover-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 8px; height: 8px;
+    background: var(--green);
+    border-radius: 50%;
+    margin-right: 16px;
+    vertical-align: middle;
+  }
+
+  .cover-title {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 56px;
+    font-weight: 400;
+    color: #fff;
+    line-height: 1.25;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .cover-en-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 88px;
+    color: rgba(255,255,255,0.95);
+    line-height: 1;
+    letter-spacing: 0.04em;
+    margin-bottom: 32px;
+    position: relative;
+    z-index: 2;
+  }
+  .cover-en-title .accent { color: var(--green); }
+
+  .cover-sub {
+    font-size: 20px;
+    color: rgba(255,255,255,0.85);
+    letter-spacing: 0.1em;
+    margin-bottom: 60px;
+    position: relative;
+    z-index: 2;
+    max-width: 520px;
+    line-height: 1.7;
+  }
+
+  .cover-meta {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  .cover-meta-item {
+    color: rgba(255,255,255,0.8);
+  }
+  .cover-meta-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.3em;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 4px;
+  }
+  .cover-meta-value {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 0.08em;
+    color: #fff;
+  }
+
+  /* ============ SUMMARY CARDS (P2) ============ */
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-bottom: 32px;
+  }
+  .summary-card {
+    background: var(--blue-tint);
+    border-top: 6px solid var(--blue);
+    padding: 40px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .summary-card.accent {
+    background: var(--green-tint);
+    border-top-color: var(--green);
+  }
+  .summary-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 24px;
+    color: var(--blue);
+    letter-spacing: 0.15em;
+  }
+  .summary-card.accent .summary-num { color: var(--green-dark); }
+  .summary-heading {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.5;
+  }
+  .summary-body {
+    font-size: 15px;
+    color: var(--text-mid);
+    line-height: 1.8;
+  }
+
+  /* ============ STAT LAYOUT ============ */
+  .two-panel {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 32px;
+  }
+  .panel {
+    background: var(--blue-tint);
+    padding: 40px 36px;
+    border-left: 4px solid var(--blue);
+  }
+  .panel-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 28px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--line);
+  }
+  .panel-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 26px;
+    letter-spacing: 0.1em;
+    color: var(--blue);
+  }
+  .panel-role {
+    font-size: 13px;
+    color: var(--text-light);
+    letter-spacing: 0.1em;
+  }
+  .stat-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  .stat-row:last-child { margin-bottom: 0; }
+  .stat-label {
+    font-size: 16px;
+    color: var(--text-mid);
+    letter-spacing: 0.05em;
+  }
+  .stat-value {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+  }
+  .stat-num {
+    font-size: 56px;
+    color: var(--blue);
+    line-height: 1;
+  }
+  .stat-change {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 16px;
+    padding: 3px 10px;
+    border-radius: 3px;
+    letter-spacing: 0.05em;
+  }
+  .stat-change.up {
+    background: var(--green-soft);
+    color: var(--green-dark);
+  }
+  .stat-change.down {
+    background: #F0F0F0;
+    color: var(--text-light);
+  }
+
+  /* ============ OBSERVATION BOX ============ */
+  .observation {
+    background: var(--bg);
+    border-left: 4px solid var(--green);
+    padding: 24px 32px;
+    margin-top: 24px;
+  }
+  .observation-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.25em;
+    color: var(--green-dark);
+    margin-bottom: 10px;
+  }
+  .observation-text {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 16px;
+    color: var(--text);
+    line-height: 1.9;
+  }
+
+  /* ============ BAR LIST (P4) ============ */
+  .content-split {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 40px;
+    margin-bottom: 24px;
+  }
+  .section-mini-title {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--blue);
+    margin-bottom: 20px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--blue);
+    display: inline-block;
+  }
+  .bar-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .bar-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .bar-rank {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    color: var(--text-lighter);
+    width: 28px;
+    flex-shrink: 0;
+  }
+  .bar-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .bar-text {
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.5;
+  }
+  .bar-track {
+    height: 10px;
+    background: var(--line-light);
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  .bar-fill {
+    height: 100%;
+    background: var(--blue);
+    border-radius: 5px;
+  }
+  .bar-fill.green { background: var(--green); }
+  .bar-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    color: var(--blue);
+    min-width: 44px;
+    text-align: right;
+  }
+  .bar-num.green { color: var(--green-dark); }
+
+  /* ============ FUNNEL (P5) ============ */
+  .funnel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    margin: 24px 0 32px;
+  }
+  .funnel-stage {
+    background: var(--blue-tint);
+    border: 1px solid var(--blue-soft);
+    padding: 28px 40px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+  }
+  .funnel-stage.top { width: 90%; }
+  .funnel-stage.mid {
+    width: 70%;
+    background: var(--blue);
+    color: #fff;
+    border-color: var(--blue);
+  }
+  .funnel-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.25em;
+    color: var(--text-light);
+  }
+  .funnel-stage.mid .funnel-label { color: rgba(255,255,255,0.75); }
+  .funnel-title {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--text);
+  }
+  .funnel-stage.mid .funnel-title { color: #fff; }
+  .funnel-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 40px;
+    letter-spacing: 0.03em;
+    line-height: 1;
+    color: var(--blue);
+  }
+  .funnel-stage.mid .funnel-num { color: #fff; font-size: 52px; }
+  .funnel-sub {
+    font-size: 13px;
+    color: var(--text-light);
+    letter-spacing: 0.05em;
+  }
+  .funnel-stage.mid .funnel-sub { color: rgba(255,255,255,0.8); }
+  .funnel-arrow {
+    color: var(--blue);
+    font-size: 24px;
+    font-weight: 300;
+  }
+  .funnel-split {
+    display: grid;
+    grid-template-columns: 2fr 1fr 0.5fr;
+    gap: 16px;
+    width: 100%;
+  }
+  .funnel-cell {
+    padding: 32px 24px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+  .funnel-cell.line {
+    background: var(--green-soft);
+    border: 2px solid var(--green);
+  }
+  .funnel-cell.blog {
+    background: var(--blue-soft);
+    border: 1px solid var(--blue);
+  }
+  .funnel-cell.other {
+    background: var(--line-light);
+    border: 1px solid var(--line);
+  }
+  .funnel-cell-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.2em;
+    color: var(--text-light);
+  }
+  .funnel-cell.line .funnel-cell-label { color: var(--green-dark); }
+  .funnel-cell-title {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 15px;
+    color: var(--text);
+  }
+  .funnel-cell-num {
+    font-family: 'Bebas Neue', sans-serif;
+    line-height: 1;
+  }
+  .funnel-cell.line .funnel-cell-num {
+    font-size: 96px;
+    color: var(--green-dark);
+  }
+  .funnel-cell.blog .funnel-cell-num {
+    font-size: 56px;
+    color: var(--blue);
+  }
+  .funnel-cell.other .funnel-cell-num {
+    font-size: 32px;
+    color: var(--text-light);
+  }
+  .funnel-cell-pct {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 15px;
+    letter-spacing: 0.1em;
+    color: var(--text-light);
+  }
+  .funnel-cell.line .funnel-cell-pct { color: var(--green-dark); }
+
+  /* ============ BIG STAT ROW (P6) ============ */
+  .big-stat-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 32px;
+  }
+  .big-stat {
+    background: var(--blue-tint);
+    padding: 32px 24px;
+    text-align: center;
+    border-bottom: 4px solid var(--blue);
+  }
+  .big-stat.accent {
+    background: var(--green-tint);
+    border-bottom-color: var(--green);
+  }
+  .big-stat-label {
+    font-size: 13px;
+    color: var(--text-light);
+    letter-spacing: 0.15em;
+    margin-bottom: 12px;
+  }
+  .big-stat-value {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 64px;
+    color: var(--blue);
+    line-height: 1;
+    margin-bottom: 8px;
+    letter-spacing: 0.02em;
+  }
+  .big-stat.accent .big-stat-value { color: var(--green-dark); }
+  .big-stat-unit {
+    font-size: 20px;
+    color: var(--text-mid);
+    margin-left: 4px;
+  }
+  .big-stat-change {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 15px;
+    color: var(--green-dark);
+    letter-spacing: 0.05em;
+  }
+  .big-stat-change.down { color: var(--text-light); }
+  .big-stat-note {
+    font-size: 12px;
+    color: var(--text-light);
+    margin-top: 6px;
+  }
+
+  /* ============ REGION GRID (P7) ============ */
+  .region-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  .region-card {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-top: 5px solid var(--line);
+    padding: 24px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .region-card.scale {
+    border-top-color: var(--blue);
+    background: var(--blue-tint);
+  }
+  .region-card.depth {
+    border-top-color: var(--green);
+    background: var(--green-tint);
+  }
+  .region-tag {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--text-lighter);
+    text-transform: uppercase;
+  }
+  .region-card.scale .region-tag { color: var(--blue); }
+  .region-card.depth .region-tag { color: var(--green-dark); }
+  .region-name {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 24px;
+    font-weight: 500;
+    color: var(--text);
+  }
+  .region-metrics {
+    display: flex;
+    gap: 16px;
+    margin-top: 8px;
+  }
+  .region-metric {
+    flex: 1;
+  }
+  .region-metric-label {
+    font-size: 11px;
+    color: var(--text-light);
+    letter-spacing: 0.1em;
+    margin-bottom: 4px;
+  }
+  .region-metric-value {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 24px;
+    color: var(--blue);
+    line-height: 1;
+  }
+  .region-card.depth .region-metric-value.time { color: var(--green-dark); font-size: 30px; }
+  .region-card.scale .region-metric-value.users { font-size: 30px; }
+
+  /* ============ KEYWORD (P8) ============ */
+  .kw-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 24px;
+  }
+  .kw-column {
+    background: var(--blue-tint);
+    padding: 32px 32px;
+  }
+  .kw-column.b { background: var(--green-tint); }
+  .kw-col-title {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--blue);
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--blue);
+  }
+  .kw-column.b .kw-col-title {
+    color: var(--green-dark);
+    border-bottom-color: var(--green);
+  }
+  .kw-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .kw-item {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+  .kw-item:last-child { border-bottom: none; }
+  .kw-word {
+    font-size: 16px;
+    color: var(--text);
+  }
+  .kw-count {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    color: var(--blue);
+    letter-spacing: 0.05em;
+  }
+  .kw-column.b .kw-count { color: var(--green-dark); }
+
+  /* ============ PIVOT (P9) ============ */
+  .pivot-compare {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    background: var(--blue-tint);
+    padding: 40px;
+    margin-bottom: 32px;
+  }
+  .pivot-side {
+    text-align: center;
+    flex: 1;
+  }
+  .pivot-side-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.2em;
+    color: var(--text-light);
+    margin-bottom: 12px;
+  }
+  .pivot-side-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 88px;
+    color: var(--blue);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .pivot-side.after .pivot-side-num { color: var(--green-dark); }
+  .pivot-side-sub {
+    font-size: 14px;
+    color: var(--text-light);
+    letter-spacing: 0.05em;
+  }
+  .pivot-arrow {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px;
+    color: var(--green);
+    flex-shrink: 0;
+  }
+  .theme-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  .theme-card {
+    background: var(--green-tint);
+    border-top: 4px solid var(--green);
+    padding: 24px 20px;
+    text-align: center;
+  }
+  .theme-en {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--green-dark);
+    margin-bottom: 8px;
+  }
+  .theme-name {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 18px;
+    color: var(--text);
+    margin-bottom: 16px;
+  }
+  .theme-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 44px;
+    color: var(--green-dark);
+    line-height: 1;
+  }
+  .theme-unit {
+    font-size: 12px;
+    color: var(--text-light);
+    margin-top: 4px;
+    letter-spacing: 0.1em;
+  }
+
+  /* ============ RECOMMENDATIONS (P10) ============ */
+  .recom-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .recom-item {
+    display: flex;
+    gap: 24px;
+    background: var(--blue-tint);
+    padding: 28px 32px;
+    border-left: 4px solid var(--blue);
+  }
+  .recom-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 48px;
+    color: var(--blue);
+    line-height: 1;
+    flex-shrink: 0;
+    width: 60px;
+  }
+  .recom-body {
+    flex: 1;
+  }
+  .recom-title {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 10px;
+  }
+  .recom-text {
+    font-size: 15px;
+    color: var(--text-mid);
+    line-height: 1.9;
+  }
+
+  /* ============ CLOSING ============ */
+  .slide.closing {
+    background: #0F5A85;
+    color: #fff;
+    padding: 80px 92px;
+    min-height: 320px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    overflow: hidden;
+  }
+  .slide.closing::before { display: none; }
+  .closing-en {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 72px;
+    color: #fff;
+    letter-spacing: 0.06em;
+    line-height: 1;
+    margin-bottom: 24px;
+    position: relative;
+    z-index: 2;
+  }
+  .closing-en .accent { color: var(--green); }
+  .closing-meta {
+    position: relative;
+    z-index: 2;
+    color: rgba(255,255,255,0.7);
+    font-size: 14px;
+    letter-spacing: 0.2em;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .closing-meta::before {
+    content: '';
+    width: 32px;
+    height: 1px;
+    background: rgba(255,255,255,0.5);
+  }
+
+  /* ============ MOBILE ============ */
+  @media (max-width: 968px) {
+    body { padding: 16px 8px; gap: 12px; }
+    .slide {
+      padding: 48px 32px 48px 44px;
+    }
+    .slide::before { width: 8px; }
+    .slide-title { font-size: 30px; }
+    .cover-title { font-size: 40px; }
+    .cover-en-title { font-size: 60px; }
+    .cover-sub { font-size: 16px; }
+    .cover { padding: 60px 32px 60px 44px; min-height: auto; }
+    .cover-radial { width: 380px; height: 380px; right: -140px; }
+
+    .summary-grid { grid-template-columns: 1fr; gap: 16px; }
+    .two-panel { grid-template-columns: 1fr; gap: 20px; }
+    .content-split { grid-template-columns: 1fr; gap: 24px; }
+    .big-stat-row { grid-template-columns: 1fr; gap: 12px; }
+    .region-grid { grid-template-columns: repeat(2, 1fr); }
+    .kw-split { grid-template-columns: 1fr; gap: 20px; }
+    .theme-grid { grid-template-columns: repeat(2, 1fr); }
+
+    .funnel-stage.top, .funnel-stage.mid { width: 100%; }
+    .funnel-split { grid-template-columns: 1fr; gap: 12px; }
+    .funnel-cell.line .funnel-cell-num { font-size: 72px; }
+    .funnel-cell.blog .funnel-cell-num { font-size: 44px; }
+
+    .pivot-compare { padding: 28px 20px; gap: 16px; }
+    .pivot-side-num { font-size: 56px; }
+    .pivot-arrow { font-size: 22px; }
+
+    .recom-item { flex-direction: column; padding: 24px; gap: 12px; }
+    .recom-num { width: auto; font-size: 36px; }
+
+    .stat-num { font-size: 42px; }
+    .big-stat-value { font-size: 48px; }
+
+    .closing-en { font-size: 48px; }
+    .slide.closing { padding: 48px 32px 48px 44px; min-height: 240px; }
+  }
+
+  @media (max-width: 520px) {
+    .slide-title { font-size: 26px; }
+    .cover-title { font-size: 32px; }
+    .cover-en-title { font-size: 44px; }
+    .region-grid { grid-template-columns: 1fr; }
+    .theme-grid { grid-template-columns: 1fr; }
+    .funnel-stage { padding: 24px 20px; }
+    .funnel-num { font-size: 32px; }
+    .funnel-stage.mid .funnel-num { font-size: 40px; }
+  }
+
+  /* ============ PRINT ============ */
+  @media print {
+    body { background: #fff; padding: 0; gap: 0; }
+    .slide {
+      box-shadow: none;
+      page-break-after: always;
+      max-width: 100%;
+      margin: 0;
+    }
+    .slide:last-child { page-break-after: auto; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ P1 COVER ============ -->
+<section class="slide cover">
+  <svg class="cover-radial" viewBox="0 0 600 600">
+    <line x1="600" y1="300" x2="0" y2="0"/>
+    <line x1="600" y1="300" x2="60" y2="0"/>
+    <line x1="600" y1="300" x2="120" y2="0"/>
+    <line x1="600" y1="300" x2="180" y2="0"/>
+    <line x1="600" y1="300" x2="240" y2="0"/>
+    <line x1="600" y1="300" x2="300" y2="0"/>
+    <line x1="600" y1="300" x2="360" y2="0"/>
+    <line x1="600" y1="300" x2="420" y2="0"/>
+    <line x1="600" y1="300" x2="480" y2="0"/>
+    <line x1="600" y1="300" x2="0" y2="120"/>
+    <line x1="600" y1="300" x2="0" y2="240"/>
+    <line x1="600" y1="300" x2="0" y2="360"/>
+    <line x1="600" y1="300" x2="0" y2="480"/>
+    <line x1="600" y1="300" x2="0" y2="600"/>
+    <line x1="600" y1="300" x2="60" y2="600"/>
+    <line x1="600" y1="300" x2="120" y2="600"/>
+    <line x1="600" y1="300" x2="180" y2="600"/>
+    <line x1="600" y1="300" x2="240" y2="600"/>
+    <line x1="600" y1="300" x2="300" y2="600"/>
+    <line x1="600" y1="300" x2="360" y2="600"/>
+    <line x1="600" y1="300" x2="420" y2="600"/>
+    <line x1="600" y1="300" x2="480" y2="600"/>
+  </svg>
+
+  <div>
+    <div class="cover-eyebrow">HARMONIZE DESIGN　T2Q3</div>
+    <div class="cover-en-title">DATA<br><span class="accent">OBSERVATION</span></div>
+    <div class="cover-title">社群與數據觀察報告</div>
+    <div class="cover-sub">從教育到分享——廣度換深度的觀察期</div>
+  </div>
+
+  <div class="cover-meta">
+    <div class="cover-meta-item">
+      <div class="cover-meta-label">PERIOD</div>
+      <div class="cover-meta-value">2026 / 03 / 15 – 06 / 14</div>
+    </div>
+    <div class="cover-meta-item">
+      <div class="cover-meta-label">CYCLE</div>
+      <div class="cover-meta-value">TERM 2 · Q3</div>
+    </div>
+    <div class="cover-meta-item">
+      <div class="cover-meta-label">BRAND</div>
+      <div class="cover-meta-value">寬堂空間設計</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ P2 SUMMARY ============ -->
+<section class="slide">
+  <div class="slide-eyebrow">01　EXECUTIVE SUMMARY</div>
+  <h2 class="slide-title">本季摘要</h2>
+  <p class="slide-subtitle">三個關鍵訊號，重點抓取本季走勢</p>
+
+  <div class="summary-grid">
+    <div class="summary-card">
+      <div class="summary-num">FINDING 01</div>
+      <div class="summary-heading">從「衝觸及」<br>轉向「養深度」</div>
+      <div class="summary-body">FB 貼文瀏覽回落 26.8%，但互動逆勢成長 13.4%，官網停留深度大幅提升。廣度縮減，換來更貼近品牌的受眾。</div>
+    </div>
+    <div class="summary-card accent">
+      <div class="summary-num">FINDING 02</div>
+      <div class="summary-heading">社群導流力<br>翻倍成長</div>
+      <div class="summary-body">貼文引導點擊在策略轉向後由 210 次成長至 446 次，其中 440 次直接指向 LINE 諮詢入口，路徑驗證明確。</div>
+    </div>
+    <div class="summary-card">
+      <div class="summary-num">FINDING 03</div>
+      <div class="summary-heading">目標區域<br>訊號清晰</div>
+      <div class="summary-body">台北七大目標區合計貢獻約 300 位活躍使用者。大安領先規模，大直與松山的閱讀深度最為突出。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ P3 SOCIAL OVERVIEW ============ -->
+<section class="slide">
+  <div class="slide-eyebrow">02　SOCIAL OVERVIEW</div>
+  <h2 class="slide-title">社群整體表現</h2>
+  <p class="slide-subtitle">Facebook 與 Instagram 的分工樣貌</p>
+
+  <div class="two-panel">
+    <div class="panel">
+      <div class="panel-header">
+        <div class="panel-title">FACEBOOK</div>
+        <div class="panel-role">轉換主場</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-label">貼文瀏覽</div>
+        <div class="stat-value">
+          <span class="stat-num">673</span>
+          <span class="stat-change down">↓ 26.8%</span>
+        </div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-label">貼文互動</div>
+        <div class="stat-value">
+          <span class="stat-num">76</span>
+          <span class="stat-change up">↑ 13.4%</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-header">
+        <div class="panel-title">INSTAGRAM</div>
+        <div class="panel-role">曝光通道</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-label">貼文瀏覽</div>
+        <div class="stat-value">
+          <span class="stat-num">500</span>
+          <span class="stat-change up">↑ 39.3%</span>
+        </div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-label">觸及人數</div>
+        <div class="stat-value">
+          <span class="stat-num">58</span>
+          <span class="stat-change up">↑ 34.9%</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="observation">
+    <div class="observation-label">OBSERVATION</div>
+    <div class="observation-text">
+      本季社群刻意收斂廣度、深化質量，因此 FB 瀏覽量回落，但互動不減反增，代表觸及到的受眾更貼近寬堂真正的目標客群。IG 則穩定成長觸及與能見度，與 FB 形成分工——IG 負責讓更多人看見，FB 負責承接互動與後續行動。這樣的結構，正呼應寬堂沉穩、重視內在價值的品牌路線。
+    </div>
+  </div>
+</section>
+
+<!-- ============ P4 CONTENT PERFORMANCE ============ -->
+<section class="slide">
+  <div class="slide-eyebrow">03　CONTENT PERFORMANCE</div>
+  <h2 class="slide-title">內容效益：哪些主題真的有回應</h2>
+  <p class="slide-subtitle">從高瀏覽貼文與主題點擊，讀出受眾偏好</p>
+
+  <div class="content-split">
+    <div>
+      <div class="section-mini-title">FB 高瀏覽貼文 TOP 5</div>
+      <div class="bar-list">
+        <div class="bar-item">
+          <div class="bar-rank">01</div>
+          <div class="bar-body">
+            <div class="bar-text">2026 普立茲克獎（名人分享）</div>
+            <div class="bar-track"><div class="bar-fill" style="width:100%"></div></div>
+          </div>
+          <div class="bar-num">44</div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-rank">02</div>
+          <div class="bar-body">
+            <div class="bar-text">屋主談裝修，第一個想到收納</div>
+            <div class="bar-track"><div class="bar-fill" style="width:82%"></div></div>
+          </div>
+          <div class="bar-num">36</div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-rank">03</div>
+          <div class="bar-body">
+            <div class="bar-text">把生活順序排好，家自然舒心</div>
+            <div class="bar-track"><div class="bar-fill" style="width:73%"></div></div>
+          </div>
+          <div class="bar-num">32</div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-rank">04</div>
+          <div class="bar-body">
+            <div class="bar-text">城市的節奏改變，家的想像也會跟著更新</div>
+            <div class="bar-track"><div class="bar-fill" style="width:70%"></div></div>
+          </div>
+          <div class="bar-num">31</div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-rank">05</div>
+          <div class="bar-body">
+            <div class="bar-text">下班後的內湖，內科日常</div>
+            <div class="bar-track"><div class="bar-fill" style="width:70%"></div></div>
+          </div>
+          <div class="bar-num">31</div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="section-mini-title">引導點擊最高的主題</div>
+      <div class="bar-list">
+        <div class="bar-item">
+          <div class="bar-rank">01</div>
+          <div class="bar-body">
+            <div class="bar-text">大安區</div>
+            <div class="bar-track"><div class="bar-fill green" style="width:100%"></div></div>
+          </div>
+          <div class="bar-num green">73</div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-rank">02</div>
+          <div class="bar-body">
+            <div class="bar-text">空間美學</div>
+            <div class="bar-track"><div class="bar-fill" style="width:68%"></div></div>
+          </div>
+          <div class="bar-num">50</div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-rank">03</div>
+          <div class="bar-body">
+            <div class="bar-text">大直</div>
+            <div class="bar-track"><div class="bar-fill green" style="width:59%"></div></div>
+          </div>
+          <div class="bar-num green">43</div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-rank">04</div>
+          <div class="bar-body">
+            <div class="bar-text">AI 找設計師</div>
+            <div class="bar-track"><div class="bar-fill" style="width:52%"></div></div>
+          </div>
+          <div class="bar-num">38</div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-rank">05</div>
+          <div class="bar-body">
+            <div class="bar-text">合作的距離（新主題）</div>
+            <div class="bar-track"><div class="bar-fill green" style="width:49%"></div></div>
+          </div>
+          <div class="bar-num green">36</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="observation">
+    <div class="observation-label">OBSERVATION</div>
+    <div class="observation-text">
+      兩類內容最能帶動受眾行動——一是<strong>區域題</strong>（大安、大直、松山等），讓目標屋主感覺「這說的是我家附近」；二是<strong>名人與觀點題</strong>（如普立茲克獎），以建築思維承接寬堂的空間哲學。這也確認了內容轉向的方向：受眾回應的不是硬知識，而是「有情境、有觀點、與自己有關」的分享。
+    </div>
+  </div>
+</section>
+
+<!-- ============ P5 FUNNEL — CORE ============ -->
+<section class="slide">
+  <div class="slide-eyebrow">04　CONVERSION FUNNEL</div>
+  <h2 class="slide-title">導流橋樑：從社群到諮詢</h2>
+  <p class="slide-subtitle">貼文如何一步步把受眾帶到 LINE 諮詢入口</p>
+
+  <div class="funnel">
+    <div class="funnel-stage top">
+      <div class="funnel-label">STAGE 01　EXPOSURE</div>
+      <div class="funnel-title">貼文觸及</div>
+      <div class="funnel-sub">FB 貼文瀏覽 673　|　IG 貼文瀏覽 500</div>
+    </div>
+
+    <div class="funnel-arrow">↓</div>
+
+    <div class="funnel-stage mid">
+      <div class="funnel-label">STAGE 02　CLICK</div>
+      <div class="funnel-title">引導點擊</div>
+      <div class="funnel-num">656</div>
+      <div class="funnel-sub">貼文 CTA 累計外部點擊</div>
+    </div>
+
+    <div class="funnel-arrow">↓</div>
+
+    <div class="funnel-split">
+      <div class="funnel-cell line">
+        <div class="funnel-cell-label">LINE 諮詢入口</div>
+        <div class="funnel-cell-title">最短諮詢路徑</div>
+        <div class="funnel-cell-num">440</div>
+        <div class="funnel-cell-pct">67.1%</div>
+      </div>
+      <div class="funnel-cell blog">
+        <div class="funnel-cell-label">部落格深讀</div>
+        <div class="funnel-cell-title">內容延伸閱讀</div>
+        <div class="funnel-cell-num">212</div>
+        <div class="funnel-cell-pct">32.3%</div>
+      </div>
+      <div class="funnel-cell other">
+        <div class="funnel-cell-label">其他</div>
+        <div class="funnel-cell-title">作品／聯絡</div>
+        <div class="funnel-cell-num">4</div>
+        <div class="funnel-cell-pct">0.6%</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="observation">
+    <div class="observation-label">OBSERVATION</div>
+    <div class="observation-text">
+      三個月內，社群貼文共帶出 656 次主動點擊，其中三分之二（<strong>440 次</strong>）直接指向 LINE 諮詢入口——這是「社群內容 → 服務諮詢」這條路徑最直接的證據。搭配策略轉向後導流量由 210 翻倍至 446，可以看出：新的分享型內容不只被看見，更讓受眾願意跨出「聯繫」這一步。
+    </div>
+  </div>
+</section>
+
+<!-- ============ P6 LANDING QUALITY ============ -->
+<section class="slide">
+  <div class="slide-eyebrow">05　LANDING QUALITY</div>
+  <h2 class="slide-title">落地品質：導進來的人在做什麼</h2>
+  <p class="slide-subtitle">流量的「質」勝過「量」的一季</p>
+
+  <div class="big-stat-row">
+    <div class="big-stat">
+      <div class="big-stat-label">社群工作階段</div>
+      <div class="big-stat-value">239</div>
+      <div class="big-stat-change down">↓ 28.7%</div>
+      <div class="big-stat-note">廣度收斂，屬預期取捨</div>
+    </div>
+    <div class="big-stat accent">
+      <div class="big-stat-label">平均參與時間</div>
+      <div class="big-stat-value">7<span class="big-stat-unit">秒</span></div>
+      <div class="big-stat-change">↑ 240%</div>
+      <div class="big-stat-note">上季 2 秒　深度顯著提升</div>
+    </div>
+    <div class="big-stat accent">
+      <div class="big-stat-label">FB／貼文來源參與</div>
+      <div class="big-stat-value">9<span class="big-stat-unit">秒</span></div>
+      <div class="big-stat-change">↑ 632%</div>
+      <div class="big-stat-note">上季 1 秒　FB 是深度主力</div>
+    </div>
+  </div>
+
+  <div class="section-mini-title" style="margin-bottom:16px;">社群導入的 TOP 落地頁</div>
+  <div class="bar-list" style="margin-bottom:24px;">
+    <div class="bar-item">
+      <div class="bar-rank">01</div>
+      <div class="bar-body">
+        <div class="bar-text">大安區住宅翻修：在都市核心延續生活的格調</div>
+        <div class="bar-track"><div class="bar-fill" style="width:100%"></div></div>
+      </div>
+      <div class="bar-num">18</div>
+    </div>
+    <div class="bar-item">
+      <div class="bar-rank">02</div>
+      <div class="bar-body">
+        <div class="bar-text">建築師的理性與室內設計師的感性</div>
+        <div class="bar-track"><div class="bar-fill" style="width:89%"></div></div>
+      </div>
+      <div class="bar-num">16</div>
+    </div>
+    <div class="bar-item">
+      <div class="bar-rank">03</div>
+      <div class="bar-body">
+        <div class="bar-text">邊陲到核心：南港的轉身與家的新想像</div>
+        <div class="bar-track"><div class="bar-fill" style="width:72%"></div></div>
+      </div>
+      <div class="bar-num">13</div>
+    </div>
+    <div class="bar-item">
+      <div class="bar-rank">04</div>
+      <div class="bar-body">
+        <div class="bar-text">低調質感，河岸生活的真實樣貌</div>
+        <div class="bar-track"><div class="bar-fill" style="width:67%"></div></div>
+      </div>
+      <div class="bar-num">12</div>
+    </div>
+    <div class="bar-item">
+      <div class="bar-rank">05</div>
+      <div class="bar-body">
+        <div class="bar-text">歷史的厚度，家的承接</div>
+        <div class="bar-track"><div class="bar-fill" style="width:67%"></div></div>
+      </div>
+      <div class="bar-num">12</div>
+    </div>
+  </div>
+
+  <div class="observation">
+    <div class="observation-label">OBSERVATION</div>
+    <div class="observation-text">
+      進站人數雖收斂，但每一位停留、參與的深度顯著提升——平均參與時間成長超過兩倍。更關鍵的是，社群導入的落地頁清一色是區域題與設計觀點題，代表貼文不只是把人帶進官網，而是準確地把對的人帶到對的內容。流量的質，本季明顯優於量。
+    </div>
+  </div>
+</section>
+
+<!-- ============ P7 REGIONS ============ -->
+<section class="slide">
+  <div class="slide-eyebrow">06　REGIONAL SIGNAL</div>
+  <h2 class="slide-title">區域訊號：觸及有沒有落在對的地方</h2>
+  <p class="slide-subtitle">目標七區的規模與深度分布</p>
+
+  <div class="region-grid">
+    <div class="region-card scale">
+      <div class="region-tag">SCALE CORE　規模核心</div>
+      <div class="region-name">大安區</div>
+      <div class="region-metrics">
+        <div class="region-metric">
+          <div class="region-metric-label">活躍使用者</div>
+          <div class="region-metric-value users">114</div>
+        </div>
+        <div class="region-metric">
+          <div class="region-metric-label">平均參與</div>
+          <div class="region-metric-value">53<span style="font-size:14px;color:var(--text-light);margin-left:2px;">秒</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="region-card depth">
+      <div class="region-tag">DEPTH CORE　深度核心</div>
+      <div class="region-name">大直（中山）</div>
+      <div class="region-metrics">
+        <div class="region-metric">
+          <div class="region-metric-label">活躍使用者</div>
+          <div class="region-metric-value">60</div>
+        </div>
+        <div class="region-metric">
+          <div class="region-metric-label">平均參與</div>
+          <div class="region-metric-value time">151<span style="font-size:14px;color:var(--text-light);margin-left:2px;">秒</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="region-card depth">
+      <div class="region-tag">DEPTH CORE　深度核心</div>
+      <div class="region-name">松山區</div>
+      <div class="region-metrics">
+        <div class="region-metric">
+          <div class="region-metric-label">活躍使用者</div>
+          <div class="region-metric-value">16</div>
+        </div>
+        <div class="region-metric">
+          <div class="region-metric-label">平均參與</div>
+          <div class="region-metric-value time">128<span style="font-size:14px;color:var(--text-light);margin-left:2px;">秒</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="region-card">
+      <div class="region-tag">STEADY　穩定觸及</div>
+      <div class="region-name">中正區</div>
+      <div class="region-metrics">
+        <div class="region-metric">
+          <div class="region-metric-label">活躍使用者</div>
+          <div class="region-metric-value">45</div>
+        </div>
+        <div class="region-metric">
+          <div class="region-metric-label">平均參與</div>
+          <div class="region-metric-value">42<span style="font-size:14px;color:var(--text-light);margin-left:2px;">秒</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="region-card">
+      <div class="region-tag">GROWING　成長空間</div>
+      <div class="region-name">信義區</div>
+      <div class="region-metrics">
+        <div class="region-metric">
+          <div class="region-metric-label">活躍使用者</div>
+          <div class="region-metric-value">34</div>
+        </div>
+        <div class="region-metric">
+          <div class="region-metric-label">平均參與</div>
+          <div class="region-metric-value">22<span style="font-size:14px;color:var(--text-light);margin-left:2px;">秒</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="region-card">
+      <div class="region-tag">STEADY　穩定觸及</div>
+      <div class="region-name">內湖區</div>
+      <div class="region-metrics">
+        <div class="region-metric">
+          <div class="region-metric-label">活躍使用者</div>
+          <div class="region-metric-value">24</div>
+        </div>
+        <div class="region-metric">
+          <div class="region-metric-label">平均參與</div>
+          <div class="region-metric-value">49<span style="font-size:14px;color:var(--text-light);margin-left:2px;">秒</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="region-card">
+      <div class="region-tag">GROWING　成長空間</div>
+      <div class="region-name">南港區</div>
+      <div class="region-metrics">
+        <div class="region-metric">
+          <div class="region-metric-label">活躍使用者</div>
+          <div class="region-metric-value">6</div>
+        </div>
+        <div class="region-metric">
+          <div class="region-metric-label">平均參與</div>
+          <div class="region-metric-value">17<span style="font-size:14px;color:var(--text-light);margin-left:2px;">秒</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="observation">
+    <div class="observation-label">OBSERVATION</div>
+    <div class="observation-text">
+      目標區域呈現「規模」與「深度」兩種訊號——大安在人數上穩居核心；大直與松山雖人數較少，但每位訪客的閱讀時間遠超平均，是黏著度最高的一群。信義與南港則是下季值得加碼的成長空間。整體而言，社群觸及的地理分布，正朝寬堂設定的台北精華區收斂。
+    </div>
+  </div>
+</section>
+
+<!-- ============ P8 KEYWORDS ============ -->
+<section class="slide">
+  <div class="slide-eyebrow">07　SEARCH INTENT</div>
+  <h2 class="slide-title">搜尋關鍵字補充</h2>
+  <p class="slide-subtitle">官網自然搜尋的受眾正在關心什麼</p>
+
+  <div class="kw-split">
+    <div class="kw-column">
+      <div class="kw-col-title">機能執行型　EXECUTION</div>
+      <div class="kw-list">
+        <div class="kw-item">
+          <div class="kw-word">統包意思</div>
+          <div class="kw-count">34</div>
+        </div>
+        <div class="kw-item">
+          <div class="kw-word">新增插座</div>
+          <div class="kw-count">24</div>
+        </div>
+        <div class="kw-item">
+          <div class="kw-word">次淨衣區</div>
+          <div class="kw-count">24</div>
+        </div>
+        <div class="kw-item">
+          <div class="kw-word">增加插座</div>
+          <div class="kw-count">20</div>
+        </div>
+        <div class="kw-item">
+          <div class="kw-word">步登公寓</div>
+          <div class="kw-count">14</div>
+        </div>
+      </div>
+    </div>
+    <div class="kw-column b">
+      <div class="kw-col-title">建築探索型　EXPLORATION</div>
+      <div class="kw-list">
+        <div class="kw-item">
+          <div class="kw-word">谷口吉生</div>
+          <div class="kw-count">11</div>
+        </div>
+        <div class="kw-item">
+          <div class="kw-word">Peter Zumthor</div>
+          <div class="kw-count">11</div>
+        </div>
+        <div class="kw-item">
+          <div class="kw-word">次淨衣</div>
+          <div class="kw-count">11</div>
+        </div>
+        <div class="kw-item">
+          <div class="kw-word">統包 意思</div>
+          <div class="kw-count">9</div>
+        </div>
+        <div class="kw-item">
+          <div class="kw-word">工程統包</div>
+          <div class="kw-count">9</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="observation">
+    <div class="observation-label">OBSERVATION</div>
+    <div class="observation-text">
+      官網自然搜尋帶進的受眾，多半已進入「動手研究」階段，關心的是具體工法與機能。這批高需求關鍵字，是下季社群選題的現成素材——可將「次淨衣區」「統包」這類實際被搜尋的字，包裝成分享型情境貼文，讓官網 SEO 與社群內容彼此餵養。
+    </div>
+  </div>
+</section>
+
+<!-- ============ P9 PIVOT ============ -->
+<section class="slide">
+  <div class="slide-eyebrow">08　STRATEGIC PIVOT</div>
+  <h2 class="slide-title">策略轉向初步檢視</h2>
+  <p class="slide-subtitle">4/15 之後，四大新主題的第一份基準</p>
+
+  <div class="pivot-compare">
+    <div class="pivot-side">
+      <div class="pivot-side-label">BEFORE　3/18 – 4/14</div>
+      <div class="pivot-side-num">210</div>
+      <div class="pivot-side-sub">舊策略期間點擊</div>
+    </div>
+    <div class="pivot-arrow">▶</div>
+    <div class="pivot-side after">
+      <div class="pivot-side-label">AFTER　4/15 – 6/13</div>
+      <div class="pivot-side-num">446</div>
+      <div class="pivot-side-sub">新策略期間點擊　↑ 112%</div>
+    </div>
+  </div>
+
+  <div class="section-mini-title" style="margin-bottom:16px;">四大新主題引導點擊</div>
+  <div class="theme-grid">
+    <div class="theme-card">
+      <div class="theme-en">THE DISTANCE</div>
+      <div class="theme-name">合作的距離</div>
+      <div class="theme-num">36</div>
+      <div class="theme-unit">CLICKS</div>
+    </div>
+    <div class="theme-card">
+      <div class="theme-en">HOME OVER TIME</div>
+      <div class="theme-name">時間裡的家</div>
+      <div class="theme-num">30</div>
+      <div class="theme-unit">CLICKS</div>
+    </div>
+    <div class="theme-card">
+      <div class="theme-en">BEYOND VALUE</div>
+      <div class="theme-name">價值之外</div>
+      <div class="theme-num">26</div>
+      <div class="theme-unit">CLICKS</div>
+    </div>
+    <div class="theme-card">
+      <div class="theme-en">DESIGN PERSPECTIVE</div>
+      <div class="theme-name">設計觀點</div>
+      <div class="theme-num">25</div>
+      <div class="theme-unit">CLICKS</div>
+    </div>
+  </div>
+
+  <div class="observation">
+    <div class="observation-label">OBSERVATION</div>
+    <div class="observation-text">
+      新的四大主題自 4 月中上線，雖僅約一個半月、屬基準建立期，但初步訊號正向——四個主題全數帶出導流，其中「合作的距離」單一主題點擊已進整體前段。這代表從業主視角出發、談合作與價值的內容，確實更能推動受眾行動。本季作為觀測起點，下一季將有完整對照。
+    </div>
+  </div>
+</section>
+
+<!-- ============ P10 RECOMMENDATIONS ============ -->
+<section class="slide">
+  <div class="slide-eyebrow">09　NEXT QUARTER</div>
+  <h2 class="slide-title">下季方向　T2Q4</h2>
+  <p class="slide-subtitle">2026 / 06 / 15 – 09 / 14　四項具體建議</p>
+
+  <div class="recom-list">
+    <div class="recom-item">
+      <div class="recom-num">01</div>
+      <div class="recom-body">
+        <div class="recom-title">區域題續為導流主力，補強信義與內湖</div>
+        <div class="recom-text">大安、大直、松山已驗證有效，下季在維持節奏的同時，針對信義、內湖增加專屬情境題，把成長空間補起來。</div>
+      </div>
+    </div>
+    <div class="recom-item">
+      <div class="recom-num">02</div>
+      <div class="recom-body">
+        <div class="recom-title">深化「合作的距離」與「價值之外」</div>
+        <div class="recom-text">這兩個主題最貼近諮詢意圖，且新主題初期表現亮眼，下季加重比例，直接對準「讓人想委託」的轉換目標。</div>
+      </div>
+    </div>
+    <div class="recom-item">
+      <div class="recom-num">03</div>
+      <div class="recom-body">
+        <div class="recom-title">CTA 持續以 LINE 為主要導向，力氣集中在已被驗證的路徑</div>
+        <div class="recom-text">本季 440 次 LINE 點擊已明確驗證這條動線的成效，下季維持此設計、不分散到成效未明的通道，讓每一則貼文的引導動作都指向最短的諮詢路徑。</div>
+      </div>
+    </div>
+    <div class="recom-item">
+      <div class="recom-num">04</div>
+      <div class="recom-body">
+        <div class="recom-title">發文頻率由一週兩篇調整為一週一篇，將節奏對齊內容深度</div>
+        <div class="recom-text">本季驗證了深化質量能帶動更高的互動與行動意願。下季將每週貼文從兩篇精簡為一篇，把資源集中於單篇的敘事完整度與視覺深度，讓每一次露出都更接近寬堂沉穩的品牌樣貌，也讓受眾在資訊之間有喘息與沉澱的空間。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CLOSING ============ -->
+<section class="slide closing">
+  <svg class="cover-radial" viewBox="0 0 600 600">
+    <line x1="600" y1="300" x2="0" y2="0"/>
+    <line x1="600" y1="300" x2="120" y2="0"/>
+    <line x1="600" y1="300" x2="240" y2="0"/>
+    <line x1="600" y1="300" x2="360" y2="0"/>
+    <line x1="600" y1="300" x2="0" y2="200"/>
+    <line x1="600" y1="300" x2="0" y2="400"/>
+    <line x1="600" y1="300" x2="120" y2="600"/>
+    <line x1="600" y1="300" x2="240" y2="600"/>
+    <line x1="600" y1="300" x2="360" y2="600"/>
+  </svg>
+  <div class="closing-en">THANK<span class="accent">S</span></div>
+  <div class="closing-meta">寬堂空間設計　·　T2Q3 社群與數據觀察　·　2026 / 03 / 15 – 06 / 14</div>
+</section>
+
+</body>
+</html>
