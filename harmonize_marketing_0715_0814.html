@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>寬堂空間設計｜行銷規劃 7/15–8/14</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Noto+Sans+TC:wght@300;400;500&family=Noto+Serif+TC:wght@300;400&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black:  #0A0A0A;
+    --white:  #F5F3F0;
+    --green:  #7AB648;
+    --grey:   #888888;
+    --line:   #2A2A2A;
+    --line-lt:#DDDAD6;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    background: #1A1A1A;
+    font-family: 'Noto Sans TC', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 32px 20px;
+    gap: 8px;
+  }
+
+  .slide {
+    width: 960px;
+    max-width: 100%;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 32px rgba(0,0,0,0.6);
+  }
+
+  .layout {
+    display: flex;
+    min-height: 520px;
+  }
+  .col-label {
+    width: 180px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 48px 32px;
+  }
+  .col-label .en-top {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.25em;
+    color: var(--grey);
+    margin-bottom: 4px;
+  }
+  .col-label .en-big {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 26px;
+    letter-spacing: 0.1em;
+    line-height: 1.1;
+  }
+  .col-label .divider {
+    width: 24px;
+    height: 1px;
+    margin: 16px 0;
+  }
+  .col-label .zh-sub {
+    font-size: 18px;
+    letter-spacing: 0.15em;
+    line-height: 1.8;
+  }
+  .col-body {
+    flex: 1;
+    padding: 56px 64px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  /* COVER */
+  .cover {
+    background: var(--black);
+    min-height: 540px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 72px;
+    position: relative;
+  }
+  .radial {
+    position: absolute;
+    right: -60px; top: 50%;
+    transform: translateY(-50%);
+    width: 500px; height: 500px;
+    opacity: 0.12;
+    pointer-events: none;
+  }
+  .radial line { stroke: white; stroke-width: 1.2; }
+  .cover-eyebrow {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 15px; letter-spacing: 0.35em; color: var(--grey);
+    margin-bottom: 20px;
+    display: flex; align-items: center; gap: 14px;
+  }
+  .cover-eyebrow::before {
+    content:''; display:block; width:3px; height:3px;
+    border-radius:50%; background:var(--green);
+  }
+  .cover-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 72px; color: var(--white);
+    line-height: 0.95; letter-spacing: 0.04em;
+  }
+  .cover-title .accent { color: var(--green); }
+  .cover-date {
+    margin-top: 28px; font-size: 13px; color: var(--grey);
+    letter-spacing: 0.2em;
+    display: flex; align-items: center; gap: 16px;
+  }
+  .cover-date::before { content:''; display:block; width:32px; height:1px; background:var(--grey); }
+
+  /* DARK pages */
+  .dark { background: var(--black); }
+  .dark .col-label { border-right: 1px solid var(--line); }
+  .dark .col-label .en-big { color: var(--white); }
+  .dark .col-label .divider { background: var(--green); }
+  .dark .col-label .zh-sub { color: var(--grey); }
+
+  /* LIGHT pages */
+  .light { background: var(--white); }
+  .light .col-label { border-right: 1px solid var(--line-lt); }
+  .light .col-label .en-big { color: var(--black); }
+  .light .col-label .divider { background: var(--black); }
+  .light .col-label .zh-sub { color: var(--grey); }
+
+  /* Time plan */
+  .info-row { display:flex; align-items:baseline; gap:0; margin-bottom:40px; }
+  .info-row:last-child { margin-bottom:0; }
+  .info-label { font-family:'Bebas Neue',sans-serif; font-size:13px; letter-spacing:0.25em; color:var(--grey); width:120px; flex-shrink:0; }
+  .info-value { font-size:14px; color:var(--white); letter-spacing:0.1em; line-height:2; }
+  .info-value strong { font-family:'Bebas Neue',sans-serif; font-size:32px; letter-spacing:0.05em; color:var(--white); display:block; line-height:1; margin-bottom:8px; }
+
+  /* Tag grid */
+  .tag-grid { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--line-lt); border:1px solid var(--line-lt); }
+  .tag-cell { background:var(--white); padding:32px 36px; display:flex; flex-direction:column; gap:10px; }
+  .tag-num  { font-family:'Bebas Neue',sans-serif; font-size:12px; letter-spacing:0.3em; color:var(--grey); }
+  .tag-name { font-family:'Noto Serif TC',serif; font-size:22px; font-weight:300; color:var(--black); letter-spacing:0.05em; }
+  .tag-en   { font-family:'Bebas Neue',sans-serif; font-size:12px; letter-spacing:0.25em; color:var(--grey); }
+  .tag-cell.active { background:#F0F7EA; }
+  .tag-cell.active .tag-name { color:var(--green); }
+
+  /* Content pages */
+  .content-header { margin-bottom:28px; padding-bottom:20px; display:flex; align-items:baseline; justify-content:space-between; }
+  .content-tag { font-family:'Bebas Neue',sans-serif; font-size:12px; letter-spacing:0.3em; color:var(--green); border:1px solid var(--green); padding:4px 12px; }
+  .content-tag-zh { font-size:13px; color:var(--grey); letter-spacing:0.15em; }
+  .content-desc { font-size:16px; color:#AAAAAA; line-height:2; margin-bottom:28px; max-width:520px; }
+  .article-list { display:flex; flex-direction:column; gap:0; }
+  .article-item { display:flex; align-items:flex-start; gap:16px; padding:16px 0; border-bottom:1px solid var(--line); font-size:14px; color:var(--white); line-height:1.75; letter-spacing:0.03em; }
+  .article-item:last-child { border-bottom:none; }
+  .article-num { font-family:'Bebas Neue',sans-serif; font-size:12px; letter-spacing:0.2em; color:var(--grey); width:28px; flex-shrink:0; padding-top:3px; }
+  .article-meta { font-family:'Bebas Neue',sans-serif; font-size:11px; letter-spacing:0.2em; color:var(--green); margin-top:6px; display:block; }
+
+  /* Image blocks */
+  .img-block { width:260px; flex-shrink:0; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:10px; background:#111; border-left:1px solid var(--line); }
+  .img-block img { width:100%; height:100%; object-fit:cover; display:block; }
+  .img-block-light { width:260px; flex-shrink:0; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:10px; background:#E8E5E0; border-left:1px solid var(--line-lt); }
+  .img-block-light img { width:100%; height:100%; object-fit:cover; display:block; }
+
+  /* CALENDAR — light theme for readability */
+  .cal-slide { background:var(--white); display:flex; min-height:520px; }
+  .cal-label-col { width:180px; flex-shrink:0; padding:48px 32px; border-right:1px solid var(--line-lt); display:flex; flex-direction:column; justify-content:flex-end; }
+  .cal-label-col .en-top { font-family:'Bebas Neue',sans-serif; font-size:13px; letter-spacing:0.25em; color:var(--grey); margin-bottom:4px; }
+  .cal-label-col .en-big { font-family:'Bebas Neue',sans-serif; font-size:26px; letter-spacing:0.1em; color:var(--black); line-height:1.1; }
+  .cal-label-col .divider { width:24px; height:1px; background:var(--green); margin:16px 0; }
+  .cal-label-col .zh-sub { font-size:18px; color:var(--grey); letter-spacing:0.15em; line-height:1.8; }
+  .cal-body { flex:1; padding:36px 44px; display:flex; flex-direction:column; }
+  .cal-month-label { font-family:'Bebas Neue',sans-serif; font-size:13px; letter-spacing:0.3em; color:var(--grey); margin-bottom:16px; }
+  .cal-grid { display:grid; grid-template-columns:repeat(7,1fr); gap:1px; background:var(--line-lt); border:1px solid var(--line-lt); flex:1; }
+  .cc { background:var(--white); padding:9px 9px 7px; min-height:62px; display:flex; flex-direction:column; gap:5px; }
+  .cc.hd { min-height:auto; padding:8px 9px; background:var(--black); align-items:center; }
+  .cc.hd span { font-family:'Bebas Neue',sans-serif; font-size:12px; letter-spacing:0.2em; color:rgba(255,255,255,0.6); }
+  .cc.off { background:#EFECE8; }
+  .cc.past { background:#F5F3F0; }
+  .cc.post { background:#EBF3E8; }
+  .cc-date { font-family:'Bebas Neue',sans-serif; font-size:14px; letter-spacing:0.05em; color:#AAAAAA; }
+  .cc.past .cc-date { color:#CCCCCC; }
+  .cc.post .cc-date { color:var(--green); font-size:15px; }
+  .cc-tag { font-size:12px; color:#2E5B3C; background:rgba(122,182,72,0.15); padding:2px 6px; letter-spacing:0.03em; line-height:1.5; display:inline-block; }
+  .cc-time { font-size:10px; color:#5F8B47; letter-spacing:0.05em; }
+
+  /* THANKS */
+  .thanks { background:var(--black); min-height:540px; display:flex; align-items:center; padding:0 72px; position:relative; overflow:hidden; }
+  .thanks-word { font-family:'Bebas Neue',sans-serif; font-size:96px; color:var(--white); letter-spacing:0.06em; line-height:1; margin-bottom:24px; }
+  .thanks-word .accent { color:var(--green); }
+  .thanks-meta { font-size:13px; color:var(--grey); letter-spacing:0.2em; display:flex; align-items:center; gap:16px; }
+  .thanks-meta::before { content:''; display:block; width:32px; height:1px; background:var(--grey); }
+
+  /* RWD */
+  @media (max-width: 900px) {
+    body { padding: 16px 8px; }
+    .slide { width: 100%; }
+    .cover, .thanks { padding: 48px 32px; min-height: auto; flex-direction: column; align-items: flex-start; gap: 32px; }
+    .cover-title { font-size: 48px; }
+    .thanks-word { font-size: 64px; }
+    .radial { width: 300px; height: 300px; right: -80px; }
+    .layout { flex-direction: column; min-height: auto; }
+    .col-label { width: 100%; padding: 32px 32px 20px; border-right: none; border-bottom: 1px solid var(--line); flex-direction: row; align-items: baseline; gap: 20px; justify-content: flex-start; }
+    .light .col-label { border-bottom: 1px solid var(--line-lt); }
+    .col-label .divider { display: none; }
+    .col-label .zh-sub { font-size: 15px; line-height: 1.5; }
+    .col-body { padding: 32px; }
+    .img-block, .img-block-light { width: 100%; height: 220px; border-left: none; border-top: 1px solid var(--line); }
+    .light .img-block-light { border-top: 1px solid var(--line-lt); }
+    .content-desc { font-size: 14px; }
+    .article-item { font-size: 13px; }
+    .cal-slide { flex-direction: column; }
+    .cal-label-col { width: 100%; padding: 32px; border-right: none; border-bottom: 1px solid var(--line-lt); flex-direction: row; align-items: baseline; gap: 20px; }
+    .cal-label-col .divider { display: none; }
+    .cal-label-col .zh-sub { font-size: 14px; line-height: 1.4; }
+    .cal-body { padding: 24px; }
+    .cc { min-height: 48px; padding: 6px; }
+    .cc-date { font-size: 12px; }
+    .cc-tag { font-size: 10px; padding: 1px 4px; }
+    .cc.hd span { font-size: 10px; }
+    .tag-cell { padding: 20px; }
+    .tag-name { font-size: 18px; }
+    .info-row { flex-direction: column; margin-bottom: 28px; }
+    .info-label { width: auto; margin-bottom: 8px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- P1 COVER -->
+<div class="slide cover">
+  <svg class="radial" viewBox="0 0 500 500">
+    <line x1="500" y1="250" x2="0"   y2="0"/><line x1="500" y1="250" x2="30"  y2="0"/>
+    <line x1="500" y1="250" x2="70"  y2="0"/><line x1="500" y1="250" x2="110" y2="0"/>
+    <line x1="500" y1="250" x2="150" y2="0"/><line x1="500" y1="250" x2="190" y2="0"/>
+    <line x1="500" y1="250" x2="230" y2="0"/><line x1="500" y1="250" x2="270" y2="0"/>
+    <line x1="500" y1="250" x2="310" y2="0"/><line x1="500" y1="250" x2="350" y2="0"/>
+    <line x1="500" y1="250" x2="390" y2="0"/><line x1="500" y1="250" x2="430" y2="0"/>
+    <line x1="500" y1="250" x2="0"   y2="100"/><line x1="500" y1="250" x2="0" y2="200"/>
+    <line x1="500" y1="250" x2="0"   y2="300"/><line x1="500" y1="250" x2="0" y2="400"/>
+    <line x1="500" y1="250" x2="50"  y2="500"/><line x1="500" y1="250" x2="150" y2="500"/>
+    <line x1="500" y1="250" x2="250" y2="500"/><line x1="500" y1="250" x2="350" y2="500"/>
+    <line x1="500" y1="250" x2="450" y2="500"/>
+  </svg>
+  <div style="position:relative;z-index:2;">
+    <div class="cover-eyebrow">HARMONIZE DESIGN　2026</div>
+    <div class="cover-title">MARKETING<br><span class="accent">PLANN</span>ING</div>
+    <div class="cover-date">7/15 – 8/14　行銷規劃簡報</div>
+  </div>
+  <div style="position:relative;z-index:2;font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:0.25em;color:#F5F3F0;">寬堂空間設計</div>
+</div>
+
+<!-- P2 時間規劃 -->
+<div class="slide dark">
+  <div class="layout">
+    <div class="col-label">
+      <div class="en-top">01</div>
+      <div class="en-big">TIME<br>PLAN</div>
+      <div class="divider"></div>
+      <div class="zh-sub">時間規劃</div>
+    </div>
+    <div class="col-body">
+      <div class="info-row">
+        <div class="info-label">FREQUENCY</div>
+        <div class="info-value"><strong>每週一篇</strong>發文頻率</div>
+      </div>
+      <div class="info-row">
+        <div class="info-label">TIME SLOT</div>
+        <div class="info-value">平日<br>12:00 ～ 13:00<br>18:00 ～ 19:00</div>
+      </div>
+    </div>
+    <div class="img-block">
+      <img src="23.jpg" alt="">
+    </div>
+  </div>
+</div>
+
+<!-- P3 主題規劃 -->
+<div class="slide light">
+  <div class="layout">
+    <div class="col-label">
+      <div class="en-top">02</div>
+      <div class="en-big">THEME<br>PLAN</div>
+      <div class="divider"></div>
+      <div class="zh-sub">主題<br>規劃</div>
+    </div>
+    <div class="col-body" style="padding:48px;">
+      <div class="tag-grid">
+        <div class="tag-cell">
+          <div class="tag-num">01</div>
+          <div class="tag-name">設計觀點</div>
+          <div class="tag-en">DESIGN PERSPECTIVE</div>
+        </div>
+        <div class="tag-cell">
+          <div class="tag-num">02</div>
+          <div class="tag-name">合作的距離</div>
+          <div class="tag-en">THE DISTANCE</div>
+        </div>
+        <div class="tag-cell">
+          <div class="tag-num">03</div>
+          <div class="tag-name">價值之外</div>
+          <div class="tag-en">BEYOND VALUE</div>
+        </div>
+        <div class="tag-cell">
+          <div class="tag-num">04</div>
+          <div class="tag-name">時間裡的家</div>
+          <div class="tag-en">HOME OVER TIME</div>
+        </div>
+      </div>
+    </div>
+    <div class="img-block-light">
+      <img src="2.jpg" alt="">
+    </div>
+  </div>
+</div>
+
+<!-- P4 合作的距離（7/20 大安篇） -->
+<div class="slide dark">
+  <div class="layout">
+    <div class="col-label">
+      <div class="en-top">03</div>
+      <div class="en-big">THE<br>DIS-<br>TANCE</div>
+      <div class="divider"></div>
+      <div class="zh-sub">合作的距離<br>主題內容</div>
+    </div>
+    <div class="col-body">
+      <div class="content-header" style="border-bottom:1px solid var(--line);">
+        <div class="content-tag">THE DISTANCE</div>
+        <div class="content-tag-zh">合作的距離</div>
+      </div>
+      <div class="content-desc">許多屋主在踏出第一步前，最大的猶豫不是預算或風格，而是「這個人到底適不適合」。這個主題從業主視角出發，談那些還沒說出口的疑慮，以及合作關係如何被慢慢建立。</div>
+      <div class="article-list">
+        <div class="article-item">
+          <div class="article-num">01</div>
+          <div>
+            住在大安，翻修最怕的其實不是預算——是家被改得不像自己
+            <span class="article-meta">POST ｜ 7/20 MON ｜ 對應〈設計在地圖：大安篇 Vol.2〉</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="img-block">
+      <img src="7-8-01.png" alt="">
+    </div>
+  </div>
+</div>
+
+<!-- P5 價值之外（7/23 裝修業資格） -->
+<div class="slide light">
+  <div class="layout">
+    <div class="col-label">
+      <div class="en-top">04</div>
+      <div class="en-big">BEYOND<br>VALUE</div>
+      <div class="divider"></div>
+      <div class="zh-sub">價值之外<br>主題內容</div>
+    </div>
+    <div class="col-body">
+      <div class="content-header" style="border-bottom:1px solid var(--line-lt);">
+        <div class="content-tag" style="color:var(--black);border-color:var(--black);">BEYOND VALUE</div>
+        <div class="content-tag-zh">價值之外</div>
+      </div>
+      <div class="content-desc" style="color:#666;">裝修的價格從來不只是材料與工程的加總，更多是那些被處理掉的風險、被預判的麻煩、被避免的後悔。這個主題重新詮釋「貴」這件事，談業主真正在買的，從來不是表面看到的東西。</div>
+      <div class="article-list">
+        <div class="article-item" style="color:var(--black);border-bottom-color:var(--line-lt);">
+          <div class="article-num" style="color:#BBB;">01</div>
+          <div>
+            只差一個字，責任卻差很多——你找的是「裝潢業」還是「裝修業」？
+            <span class="article-meta" style="color:#5F8B47;">POST ｜ 7/23 THU ｜ 對應〈室內裝潢業和室內裝修業，只差一個字〉</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="img-block-light">
+      <img src="7-8-02.jpg" alt="">
+    </div>
+  </div>
+</div>
+
+<!-- P6 時間裡的家（8/3 松山篇） -->
+<div class="slide dark">
+  <div class="layout">
+    <div class="col-label">
+      <div class="en-top">05</div>
+      <div class="en-big">HOME<br>OVER<br>TIME</div>
+      <div class="divider"></div>
+      <div class="zh-sub">時間裡的家<br>主題內容</div>
+    </div>
+    <div class="col-body">
+      <div class="content-header" style="border-bottom:1px solid var(--line);">
+        <div class="content-tag">HOME OVER TIME</div>
+        <div class="content-tag-zh">時間裡的家</div>
+      </div>
+      <div class="content-desc">家不是完工那一刻就結束，而是從那天開始才真正展開。這個主題從時間的縱深切入，談那些住了一段時間之後才看清楚的事，以及為什麼有些選擇要在裝修前就被想進去。</div>
+      <div class="article-list">
+        <div class="article-item">
+          <div class="article-num">01</div>
+          <div>
+            六十年代的老公寓，翻修的不只是空間——是想留下來的日子
+            <span class="article-meta">POST ｜ 8/3 MON ｜ 對應〈設計在地圖：松山篇 Vol.2〉</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="img-block">
+      <img src="7-8-03.png" alt="">
+    </div>
+  </div>
+</div>
+
+<!-- P7 設計觀點（8/6 神戶旅館） -->
+<div class="slide light">
+  <div class="layout">
+    <div class="col-label">
+      <div class="en-top">06</div>
+      <div class="en-big">DESIGN<br>PERSP.</div>
+      <div class="divider"></div>
+      <div class="zh-sub">設計觀點<br>主題內容</div>
+    </div>
+    <div class="col-body">
+      <div class="content-header" style="border-bottom:1px solid var(--line-lt);">
+        <div class="content-tag" style="color:var(--black);border-color:var(--black);">DESIGN PERSPECTIVE</div>
+        <div class="content-tag-zh">設計觀點</div>
+      </div>
+      <div class="content-desc" style="color:#666;">從業主與設計師兩種視角的對話切入，談那些在裝修現場真正會被記得的事——不是風格，而是合作的感覺；不是堆疊，而是被處理掉的不安。</div>
+      <div class="article-list">
+        <div class="article-item" style="color:var(--black);border-bottom:none;">
+          <div class="article-num" style="color:#BBB;">01</div>
+          <div>
+            在神戶的一間旅館，看見「家」也可以有一種與遠方對話的方式
+            <span class="article-meta" style="color:#5F8B47;">POST ｜ 8/6 THU ｜ 對應〈建築師的行旅筆記 第四篇〉</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="img-block-light">
+      <img src="7-8-04.jpg" alt="">
+    </div>
+  </div>
+</div>
+
+<!-- P8 七月曆 -->
+<div class="slide cal-slide">
+  <div class="cal-label-col">
+    <div class="en-top">07</div>
+    <div class="en-big">SCHED-<br>ULE</div>
+    <div class="divider"></div>
+    <div class="zh-sub">排程規劃<br><br>七月<br>JUL 2026</div>
+  </div>
+  <div class="cal-body">
+    <div class="cal-month-label">JULY 2026　七月排程（自 7/15 起）</div>
+    <div class="cal-grid">
+      <div class="cc hd"><span>SUN</span></div><div class="cc hd"><span>MON</span></div><div class="cc hd"><span>TUE</span></div><div class="cc hd"><span>WED</span></div><div class="cc hd"><span>THU</span></div><div class="cc hd"><span>FRI</span></div><div class="cc hd"><span>SAT</span></div>
+
+      <!-- 7/1 = 週三，前空 Sun Mon Tue 三格 -->
+      <div class="cc off"></div><div class="cc off"></div><div class="cc off"></div>
+      <div class="cc past"><div class="cc-date">1</div></div>
+      <div class="cc past"><div class="cc-date">2</div></div>
+      <div class="cc past"><div class="cc-date">3</div></div>
+      <div class="cc past"><div class="cc-date">4</div></div>
+
+      <!-- 5(日) ~ 11(六) 皆為 past -->
+      <div class="cc past"><div class="cc-date">5</div></div>
+      <div class="cc past"><div class="cc-date">6</div></div>
+      <div class="cc past"><div class="cc-date">7</div></div>
+      <div class="cc past"><div class="cc-date">8</div></div>
+      <div class="cc past"><div class="cc-date">9</div></div>
+      <div class="cc past"><div class="cc-date">10</div></div>
+      <div class="cc past"><div class="cc-date">11</div></div>
+
+      <!-- 12(日) 13(一) 14(二) past；15(三) 起入排程 -->
+      <div class="cc past"><div class="cc-date">12</div></div>
+      <div class="cc past"><div class="cc-date">13</div></div>
+      <div class="cc past"><div class="cc-date">14</div></div>
+      <div class="cc"><div class="cc-date">15</div></div>
+      <div class="cc"><div class="cc-date">16</div></div>
+      <div class="cc"><div class="cc-date">17</div></div>
+      <div class="cc"><div class="cc-date">18</div></div>
+
+      <!-- 19(日) 20(一) 發文 21(二) 22(三) 23(四) 發文 24(五) 25(六) -->
+      <div class="cc"><div class="cc-date">19</div></div>
+      <div class="cc"><div class="cc-date">20</div></div>
+      <div class="cc"><div class="cc-date">21</div></div>
+      <div class="cc post"><div class="cc-date">22</div><div class="cc-tag">合作的距離</div></div>
+      <div class="cc"><div class="cc-date">23</div></div>
+      <div class="cc"><div class="cc-date">24</div></div>
+      <div class="cc"><div class="cc-date">25</div></div>
+
+      <!-- 26(日) ~ 31(五)；31 是週五，週六用 off 補齊 -->
+      <div class="cc"><div class="cc-date">26</div></div>
+      <div class="cc"><div class="cc-date">27</div></div>
+      <div class="cc"><div class="cc-date">28</div></div>
+      <div class="cc post"><div class="cc-date">29</div><div class="cc-tag">價值之外</div></div>
+      <div class="cc"><div class="cc-date">30</div></div>
+      <div class="cc"><div class="cc-date">31</div></div>
+      <div class="cc off"></div>
+    </div>
+  </div>
+</div>
+
+<!-- P9 八月曆 -->
+<div class="slide cal-slide">
+  <div class="cal-label-col">
+    <div class="en-top">08</div>
+    <div class="en-big">SCHED-<br>ULE</div>
+    <div class="divider"></div>
+    <div class="zh-sub">排程規劃<br><br>八月<br>AUG 2026</div>
+  </div>
+  <div class="cal-body">
+    <div class="cal-month-label">AUGUST 2026　八月排程（至 8/14）</div>
+    <div class="cal-grid">
+      <div class="cc hd"><span>SUN</span></div><div class="cc hd"><span>MON</span></div><div class="cc hd"><span>TUE</span></div><div class="cc hd"><span>WED</span></div><div class="cc hd"><span>THU</span></div><div class="cc hd"><span>FRI</span></div><div class="cc hd"><span>SAT</span></div>
+
+      <!-- 8/1 = 週六，前空 Sun~Fri 六格 -->
+      <div class="cc off"></div><div class="cc off"></div><div class="cc off"></div><div class="cc off"></div><div class="cc off"></div><div class="cc off"></div>
+      <div class="cc"><div class="cc-date">1</div></div>
+
+      <!-- 2(日) 3(一)發文 4(二) 5(三) 6(四)發文 7(五) 8(六) -->
+      <div class="cc"><div class="cc-date">2</div></div>
+      <div class="cc"><div class="cc-date">4</div></div>
+      <div class="cc"><div class="cc-date">5</div></div>
+      <div class="cc post"><div class="cc-date">6</div><div class="cc-tag">時間裡的家</div></div>
+      <div class="cc"><div class="cc-date">7</div></div>
+      <div class="cc"><div class="cc-date">8</div></div>
+
+      <!-- 9(日) ~ 14(五)；週六 off -->
+      <div class="cc"><div class="cc-date">9</div></div>
+      <div class="cc"><div class="cc-date">10</div></div>
+      <div class="cc"><div class="cc-date">11</div></div>
+      <div class="cc"><div class="cc-date">12</div></div>
+      <div class="cc post"><div class="cc-date">13</div><div class="cc-tag">設計觀點</div></div>
+      <div class="cc"><div class="cc-date">14</div></div>
+      <div class="cc off"></div>
+      <div class="cc off"></div>
+    </div>
+  </div>
+</div>
+
+<!-- P10 THANKS -->
+<div class="slide thanks">
+  <svg class="radial" viewBox="0 0 500 500">
+    <line x1="500" y1="250" x2="0"   y2="0"/><line x1="500" y1="250" x2="50"  y2="0"/>
+    <line x1="500" y1="250" x2="100" y2="0"/><line x1="500" y1="250" x2="150" y2="0"/>
+    <line x1="500" y1="250" x2="200" y2="0"/><line x1="500" y1="250" x2="250" y2="0"/>
+    <line x1="500" y1="250" x2="300" y2="0"/><line x1="500" y1="250" x2="350" y2="0"/>
+    <line x1="500" y1="250" x2="0"   y2="150"/><line x1="500" y1="250" x2="0" y2="350"/>
+    <line x1="500" y1="250" x2="100" y2="500"/><line x1="500" y1="250" x2="300" y2="500"/>
+  </svg>
+  <div style="position:relative;z-index:2;">
+    <div style="margin-bottom:32px;font-family:'Noto Sans TC',sans-serif;font-size:16px;letter-spacing:0.25em;color:#F5F3F0;">寬堂空間設計</div>
+    <div class="thanks-word">THANK<span class="accent">S</span></div>
+    <div class="thanks-meta">　7/15 – 8/14 社群規劃</div>
+  </div>
+</div>
+
+</body>
+</html>
